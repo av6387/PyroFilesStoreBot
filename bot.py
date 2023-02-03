@@ -25,7 +25,7 @@ from pyrogram.types import (
 from configs import Config
 from handlers.database import db
 from handlers.add_user_to_db import add_user_to_database
-from handlers.send_file import send_media_and_reply
+from handlers.send_file import send_media
 from handlers.helpers import b64_to_str, str_to_b64
 from handlers.check_user_status import handle_user_status
 from handlers.force_sub_handler import (
@@ -102,7 +102,7 @@ async def start(bot: Client, cmd: Message):
             else:
                 message_ids.append(int(GetMessage.id))
             for i in range(len(message_ids)):
-                await send_media_and_reply(bot, user_id=cmd.from_user.id, file_id=int(message_ids[i]))
+                await send_media(bot, user_id=cmd.from_user.id, file_id=int(message_ids[i]))
         except Exception as err:
             await cmd.reply_text(f"Something went wrong!\n\n**Error:** `{err}`")
 
